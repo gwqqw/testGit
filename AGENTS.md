@@ -2,16 +2,16 @@
 
 ## Project Structure & Module Organization
 
-- The repository is currently flat, with seed files in the root: `readme.txt`, `b.txt`, and `test.txt`.
-- There are no `src/`, `tests/`, or `docs/` directories yet. If you add code, create clear top-level folders (for example, `src/` for implementation, `tests/` for automated tests, and `docs/` for documentation) and keep the root minimal.
+- Source lives in `src/rag_mcp/` (FastMCP server, indexing, embeddings).
+- Tests live in `tests/` and import from `src/` via `tests/conftest.py`.
+- Reference documents for indexing are in `docs/`. The vector index persists under `data/` (runtime output; keep untracked).
 
 ## Build, Test, and Development Commands
 
-- No build or test tooling is configured yet.
-- When adding tooling, document the exact commands here. Example layout (replace with real commands once they exist):
-  - `./scripts/build.ps1` - build or package the project.
-  - `./scripts/test.ps1` - run the automated test suite.
-  - `./scripts/dev.ps1` - run the project locally or start a dev server.
+- Install dependencies: `pip install -r requirements.txt`
+- Install test tooling: `pip install -r requirements-dev.txt`
+- Run the MCP server (PowerShell): `$env:PYTHONPATH=\"src\"; python -m rag_mcp.server`
+- Run tests: `python -m pytest`
 
 ## Coding Style & Naming Conventions
 
@@ -22,9 +22,8 @@
 
 ## Testing Guidelines
 
-- No test framework is configured yet.
-- If you add tests, prefer a standard framework for the language and keep tests next to code (`tests/`) with clear naming (`*_test` or `test_*`).
-- Require tests for new behavior and bug fixes, and document the exact test command in the section above.
+- Use `pytest`. New behavior and bug fixes should include tests in `tests/`.
+- Keep tests deterministic; unit tests use the simple embedding backend to avoid network/model downloads.
 
 ## Commit & Pull Request Guidelines
 
